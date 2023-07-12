@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.row {
+    @apply flex justify-center items-center;
+}
+
+.row-h {
+    @apply flex justify-center;
+}
+
+.row-v {
+    @apply flex justify-center flex-col;
+}
+
+.pointer {
+    @apply cursor-pointer;
+}
+
