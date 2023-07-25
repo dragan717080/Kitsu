@@ -19,7 +19,7 @@ const getAnimesTags = async () => {
     const result = {};
     tags.forEach((tag) => {
       const remainingAnimes = animesByTags[tag].slice(0, 4);
-      result[tag] = remainingAnimes.map(({ id, title, coverImage }) => ({ id, title, coverImage }));
+      result[tag] = remainingAnimes.map(({ id, title, posterImage }) => ({ id, title, posterImage }));
       tags.forEach((otherTag) => {
         if (otherTag !== tag) {
           animesByTags[otherTag] = animesByTags[otherTag].filter(

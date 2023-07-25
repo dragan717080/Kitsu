@@ -18,7 +18,7 @@ export default function Home() {
     try {
       axios.get(`${process.env.NEXT_PUBLIC_URL}/api/animes/tags`)
         .then(result => result.data)
-        .then(result => setAnimes(result));
+        .then(result => { setAnimes(result); console.log('result', result['top'][0].posterImage)});
     } catch (error) {
       console.error(error);
     }
@@ -40,15 +40,15 @@ export default function Home() {
               <div className="flex align-center">
                 {animesForTag.map((anime, index) => (
                   <div className='mr-4 max-w-none tag-card' key={index}>
-                    <div className="container max-w-none overflow-hidden w-300 h-200">
-                      {anime.coverImage &&
+                    <div className="container max-w-none overflow-hidden w-300 h-400">
+                      {anime.posterImage &&
                         <a href={`/animes/${anime.id}`}>
                           <Image
-                            height="300"
+                            height="400"
                             width="240"
-                            alt={anime.title}
+                            alt=''
                             className="w-full h-full transition-transform duration-300 transform scale-100 hover:scale-120 max-w-none rounded-2xl"
-                            src={anime.coverImage}
+                            src={anime.posterImage}
                           />
                         </a>
                       }
