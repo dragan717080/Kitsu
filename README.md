@@ -1,6 +1,6 @@
 # Anime App
 
-<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/dbd4a051546457.58f11c05153fb.png" alt="Anime App Logo" height="140" width="340">
+<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/dbd4a051546457.58f11c05153fb.png" alt="Anime App Logo" height="140">
 
 Welcome to the Anime App! This application is built with Next.js, Tailwind CSS, MongoDB, NextAuth, and Prisma. It allows you to explore your favorite anime shows and movies while also providing seamless authentication through social media platforms. Get ready to dive into the exciting world of anime!
 
@@ -18,3 +18,21 @@ The Anime App is built using following technologies:
 
 - **Prisma** - Prisma is a modern database toolkit that works with TypeScript and Node.js, offering an easy-to-use API to interact with the database and manage data models effectively.
 
+## Features
+
+## 🌟 Explore Limitless Possibilities
+
+Dive into an expansive collection of anime shows and movies. Uncover hidden gems, rediscover classics, and be the first to embrace the latest releases.
+
+## ❤️ Love and Share the Magic
+
+With a simple click, you can add shows to your watchlist and bond with other users.
+
+## 🤝 Embrace the Power of Unity
+
+Join user groups to discuss your favorite shows and characters. Leave a review
+to let others know how you felt about them.
+
+## 🎉 Experience Social Authentication
+
+Sign in with ease using your favorite social media platforms. No more creating new accounts or remembering passwords!
