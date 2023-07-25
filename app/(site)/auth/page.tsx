@@ -1,21 +1,22 @@
 'use client';
 
 import { useState, useEffect, FC, useCallback } from 'react';
+import Image from 'next/image';
 import { signIn, useSession } from 'next-auth/react';
 import { FieldValues, useForm } from 'react-hook-form';
-import Input from './inputs/Input';
-import Button from './Button';
-import AuthSocialButton from './AuthSocialButton';
+import Input from '../components/inputs/Input';
+import Button from '../components/Button';
+import AuthSocialButton from '../components/AuthSocialButton';
 import { BsGithub, BsGoogle } from 'react-icons/bs';
 import { useRouter } from "next/navigation";
 import { toast } from 'react-hot-toast';
+import { AuthVariant } from '@/app/interfaces/types';
+import AuthInputFields from '../constants/AuthInputFields';
 import axios from 'axios';
 
 const AuthForm: FC = () => {
 
-  type Variant = 'LOGIN' | 'REGISTER';
-
-  const [variant, setVariant] = useState<Variant>('LOGIN');
+  const [variant, setVariant] = useState<AuthVariant>('LOGIN');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const session = useSession();
   const router = useRouter();
@@ -33,63 +34,75 @@ const AuthForm: FC = () => {
     }
   })
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-
+  
     if (variant === 'REGISTER') {
       axios.post('/api/register', data)
-        .then(() => signIn('credentials', data))
-        .catch(() => toast.error('Something went wrong'))
-        .finally(() => setIsLoading(false));
-    } else {
+      .then(() => signIn('credentials', {
+        ...data,
+        redirect: false,
+      }))
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error('Invalid credentials!');
+        }
+
+        if (callback?.ok) {
+          router.push('/conversations')
+        }
+      })
+      .catch(() => toast.error('Something went wrong!'))
+      .finally(() => setIsLoading(false))
+    }
+
+    if (variant === 'LOGIN') {
       signIn('credentials', {
         ...data,
         redirect: false
       })
-        .then((callback) => {
-          callback?.error && toast.error('Invalid Credentials');
-          if (callback?.ok && !callback?.error) {
-            toast.success('Logged In');
-            router.push('/users');
-          }
-        })
-        .finally(() => setIsLoading(false));
-      axios.post('/api/login', data)
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error('Invalid credentials!');
+        } else {
+          toast.success('Logged In');
+          router.push('/');
+        }
+      })
+      .finally(() => setIsLoading(false))
     }
   }
 
   const socialAction = (action: string) => {
     setIsLoading(true);
 
-    signIn(action, { redirect: false })
+    signIn(action, { redirect: true })
       .then((callback) => {
         callback?.error && toast.error('Invalid Credentials');
-        if (callback?.ok && !callback?.error) {
+        if (!callback?.error) {
           toast.success('Logged In');
-          router.push('/users');
+          router.push('/');
         }
       })
       .finally(() => setIsLoading(false));
   }
 
-  const inputFields = [
-    { id: 'name', label: 'Name', type: 'text', showOnRegister: true },
-    { id: 'email', label: 'Email address', type: 'email' },
-    { id: 'password', label: 'Password', type: 'password' }
-  ];
-
   useEffect(() => {
-    console.log(session);
-/*     if (session?.status === 'authenticated') {
-      router.push('/users')
-    } */
+    if (session?.status === 'authenticated') {
+      router.push('/')
+    }
   }, [session?.status, router]);
 
   return (
+    <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
+    <div className="sm:mx-auto sm:w-full sm:max-w-md">
+      <Image height="48" width="48" alt="Logo" className="h-12 w-15.5 mx-auto" src="/images/kitsu-logo.png" />
+      <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
+    </div>
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <form action="" className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          {inputFields.map((field) => (
+          {AuthInputFields.map((field) => (
             (!field.showOnRegister || variant === 'REGISTER') && (
               <Input
                 key={field.id}
@@ -145,6 +158,7 @@ const AuthForm: FC = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

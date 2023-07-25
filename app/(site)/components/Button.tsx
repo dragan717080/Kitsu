@@ -14,8 +14,7 @@ const Button: FC<ButtonProps> = (props) => {
       type={type}
       disabled={disabled}
       className={clsx(`
-        flex 
-        justify-center 
+        row-h
         rounded-md 
         px-3 
         py-2 

@@ -11,23 +11,16 @@ datasource db {
 }
 
 model User {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
-  name            String?
-  email           String?   @unique
-  emailVerified   DateTime?
-  image           String?
-  hashedPassword  String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  conversationIds String[] @db.ObjectId
-  conversations Conversation[] @relation(fields: [conversationIds], references: [id])
-  
-  seenMessageIds String[] @db.ObjectId
-  seenMessages Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   accounts Account[]
-  messages Message[]
 }
 
 model Account {
@@ -49,32 +42,68 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Conversation {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt       DateTime @default(now())
-  lastMessageAt DateTime @default(now())
-  name String?
-  isGroup Boolean?
-  
-  messagesIds String[] @db.ObjectId
-  messages Message[]
+model Character {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  names         Json
+  canonicalName String
+  otherNames    String[]
+  description   String
+  image         String
 
-  userIds String[] @db.ObjectId
-  users User[] @relation(fields: [userIds], references: [id])
+  animeId String @db.ObjectId
+  anime  Anime  @relation(fields: [animeId], references: [id], onDelete: Cascade)
 }
 
-model Message {
+model Episode {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  description   String
+  originalTitle String
+  title         String
+  season        Int
+  number        Int
+  thumbnail     String
+
+  animeId String @db.ObjectId
+  anime  Anime  @relation(fields: [animeId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  content         String
+  likesCount      Int
+  rating          Int
+  source          String
+  user_id         String
+  user_name       String
+  user_avatar     String
+  user_coverImage String
+
+  animeId String @db.ObjectId
+  anime  Anime  @relation(fields: [animeId], references: [id], onDelete: Cascade)
+}
+
+model Genre {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  body String?
-  image String?
-  createdAt DateTime @default(now())
+  name String
+}
 
-  seenIds String[] @db.ObjectId
-  seen User[] @relation("Seen", fields: [seenIds], references: [id])
-
-  conversationId String @db.ObjectId
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  
-  senderId String @db.ObjectId
-  sender User @relation(fields: [senderId], references: [id], onDelete: Cascade)
+model Anime {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  synopsis       String
+  userCount      Int
+  favoritesCount Int
+  popularityRank Int
+  ratingRank     Int
+  startDate      DateTime?
+  endDate        DateTime?
+  posterImage    String?
+  coverImage     String?
+  episodeCount   Int?
+  episodeLength  Int?
+  characters     Character[]
+  genres         String[]
+  episodes       Episode[]
+  reviews        Review[]
+  tags           String[]
 }

@@ -1,34 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Anime App
 
-## Getting Started
+![Anime App Logo](https://mir-s3-cdn-cf.behance.net/project_modules/fs/dbd4a051546457.58f11c05153fb.png)
 
-First, run the development server:
+Welcome to the Anime App! This application is built with Next.js, Tailwind CSS, MongoDB, NextAuth, and Prisma. It allows you to explore your favorite anime shows and movies while also providing seamless authentication through social media platforms. Get ready to dive into the exciting world of anime!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Technologies Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The Anime App is built using following technologies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- ** Next.js ** - Next.js is a popular React framework that enables server-side rendering (SSR) and static site generation (SSG), making the application fast and SEO-friendly.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- ** Tailwind CSS ** - Tailwind CSS is a utility-first CSS framework that provides a wide range of pre-designed utility classes, allowing for rapid and flexible UI development.
 
-## Learn More
+- ** MongoDB ** - MongoDB is a powerful NoSQL database that provides scalability and flexibility for storing anime data in JSON-like documents.
 
-To learn more about Next.js, take a look at the following resources:
+- ** NextAuth.js ** - NextAuth.js is an authentication library that simplifies the process of adding various authentication providers (such as Google, Facebook, etc.) to a Next.js application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- ** Prisma ** - Prisma is a modern database toolkit that works with TypeScript and Node.js, offering an easy-to-use API to interact with the database and manage data models effectively.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
