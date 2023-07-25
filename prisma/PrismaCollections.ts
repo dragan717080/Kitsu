@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const getQuery = (relations, where) => {
-  const d: any = relations.length > 0
+  const d = relations.length > 0
   ? {
     include: relations.reduce((acc, tag) => {
       acc[tag] = true;
@@ -19,8 +19,8 @@ return d;
 const getCollection = async (
   col: string, 
   relations: string[] = [], 
-  where: any = {}
-  ): Promise<any[]> => {
+  where = {}
+  ): Promise => {
   try {
     const d = getQuery(relations, where);
     const data = await prisma[col].findMany(d);
@@ -36,8 +36,8 @@ const getCollection = async (
 const getItem = async (
   col: string,
   relations: string[] = [],
-  where: any = {}
-): Promise<any> => {
+  where = {}
+): Promise => {
   try {
     const d = getQuery(relations, where);
     const data = await prisma[col].findUnique(d);

@@ -20,16 +20,14 @@ const MyContext = createContext('Hello');
 const AnimeLayout = (props) => {
 
   const id = props.id
-  console.log('props', props)
 
   const [activeNavbarItem, setActiveNavbarItem] = useState<animeNavbarItems>('Summary');
 
-  const [anime, setAnime] = useState<any>({});
-  const [animeDetails, setAnimeDetails] = useState<any>({});
-  const [randomReview, setRandomReview] = useState<any>({});
+  const [anime, setAnime] = useState({});
+  const [animeDetails, setAnimeDetails] = useState({});
+  const [randomReview, setRandomReview] = useState({});
 
   const getAnimeDetails = (anime) => {
-    console.log('anime', anime)
     const animeDetailsKeys = ['English', 'Type', 'Status', 'Aired', 'Favorites', 'Followers'];
     const animeDetailsValues = [anime.title, 'TV', Utils.getAiringStatus(anime.endDate), Utils.formatDateTime(anime.startDate), anime.favoritesCount, anime.userCount];
     setAnimeDetails(Utils.listsToObject(animeDetailsKeys, animeDetailsValues))

@@ -12,7 +12,7 @@ import axios from 'axios';
 export default function Home() {
 
   const session = useSession();
-  const [animes, setAnimes] = useState<any>([]);
+  const [animes, setAnimes] = useState([]);
 
   const getData = async () => {
     try {

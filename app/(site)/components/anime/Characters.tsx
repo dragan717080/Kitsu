@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Utils from '@/Utils';
 
 const Characters: FC = ({characters}) => {
-  console.log('characters', characters)
 
   return (
     <div className='-mx-5'>

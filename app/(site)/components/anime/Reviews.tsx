@@ -1,20 +1,10 @@
 import { FC } from 'react';
 import Image from 'next/image';
 import Utils from '@/Utils';
-import { ArrowDropUp, ArrowDropDown } from '@mui/icons-material';
-import { styled } from '@mui/material/styles';
-
-const StyledArrowDropUp = styled(ArrowDropUp)({
-  marginTop: '-5px', // Adjust the margin as needed
-});
-
-const StyledArrowDropDown = styled(ArrowDropDown)({
-
-});
 
 const Reviews: FC = ({ reviews }) => {
   reviews = reviews.sort((a, b) => b.likesCount - a.likesCount);
-  console.log('reviews', reviews)
+  
   return (
     <div className='-mx-5'>
       <div className='pb-3 font-bold'>Reviews</div>

@@ -23,9 +23,9 @@ const AnimeLayout = (props) => {
 
   const [activeNavbarItem, setActiveNavbarItem] = useState<animeNavbarItems>('Summary');
 
-  const [anime, setAnime] = useState<any>({});
-  const [animeDetails, setAnimeDetails] = useState<any>({});
-  const [randomReview, setRandomReview] = useState<any>({});
+  const [anime, setAnime] = useState({});
+  const [animeDetails, setAnimeDetails] = useState({});
+  const [randomReview, setRandomReview] = useState({});
 
   const getAnimeDetails = (anime) => {
     const animeDetailsKeys = ['English', 'Type', 'Status', 'Aired', 'Favorites', 'Followers'];
@@ -49,7 +49,6 @@ const AnimeLayout = (props) => {
       .then(result => {
         setAnime(result);
         getAnimeDetails(result);
-        console.log('result', result)
       });
   }, []);
 
