@@ -1,6 +1,8 @@
 # Anime App
 
-<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/dbd4a051546457.58f11c05153fb.png" alt="Anime App Logo" height="140">
+<div style="display: flex; justify-content: center;">
+    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/dbd4a051546457.58f11c05153fb.png" alt="Anime App Logo" height="140">
+</div>
 
 Welcome to the Anime App! This application is built with Next.js, Tailwind CSS, MongoDB, NextAuth, and Prisma. It allows you to explore your favorite anime shows and movies while also providing seamless authentication through social media platforms. Get ready to dive into the exciting world of anime!
 
