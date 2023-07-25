@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Kitsu',
-  description: 'Kitsu App - built with Next.js, Tailwind, MongoDB, NextAuth and Prisma',
+  description: 'Kitsu App - built with Next.js, TypeScript, Tailwind, MongoDB, NextAuth and Prisma',
 }
 
 export default function RootLayout({

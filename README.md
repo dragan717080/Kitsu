@@ -5,13 +5,15 @@
     alt="Anime App Logo" height="430" width="800">
 </div>
 
-Welcome to the Anime App! This application is built with Next.js, Tailwind CSS, MongoDB, NextAuth, and Prisma. It allows you to explore your favorite anime shows and movies while also providing seamless authentication through social media platforms. Get ready to dive into the exciting world of anime!
+Welcome to the Anime App! This application is built with Next.js, TypeScript, Tailwind CSS, MongoDB, NextAuth, and Prisma. It allows you to explore your favorite anime shows and movies while also providing seamless authentication through social media platforms. Get ready to dive into the exciting world of anime!
 
 ## Technologies Used
 
 The Anime App is built using following technologies:
 
 - **Next.js** - Next.js is a popular React framework that enables server-side rendering (SSR) and static site generation (SSG), making the application fast and SEO-friendly.
+
+- **TypeScript** - TypeScript is a programming language developed and maintained by Microsoft. It is a superset of JavaScript, meaning that it extends JavaScript by adding static typing to the language.
 
 - **Tailwind CSS** - Tailwind CSS is a utility-first CSS framework that provides a wide range of pre-designed utility classes, allowing for rapid and flexible UI development.
 
