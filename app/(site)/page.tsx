@@ -18,7 +18,7 @@ export default function Home() {
     try {
       axios.get(`${process.env.NEXT_PUBLIC_URL}/api/animes/tags`)
         .then(result => result.data)
-        .then(result => { setAnimes(result); console.log('result', result['top'][0].posterImage)});
+        .then(result => setAnimes(result));
     } catch (error) {
       console.error(error);
     }

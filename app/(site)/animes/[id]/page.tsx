@@ -1,8 +1,11 @@
 'use client';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, MouseEvent } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Image from 'next/image';
 import Utils from '@/Utils';
+import Episodes from '../../components/anime/Episodes';
+import Characters from '../../components/anime/Characters';
+import Reviews from '../../components/anime/Reviews';
 import axios from 'axios';
 
 const animeNavbarItems: string[] = ['Summary', 'Episodes', 'Characters', 'Reviews'];
@@ -16,8 +19,7 @@ const getData = async (id: string) => {
 
 const AnimeLayout = (props) => {
 
-  const id = props.params.id
-  console.log('props', props)
+  const id: string = props.params.id
 
   const [activeNavbarItem, setActiveNavbarItem] = useState<animeNavbarItems>('Summary');
 
@@ -33,6 +35,15 @@ const AnimeLayout = (props) => {
       setRandomReview(anime.reviews[Math.floor(Math.random() * anime.reviews.length)]);
   }
 
+  const handleNavbarClick = (e: MouseEvent) => {
+    Array.from(document.getElementsByClassName('navbar-item')).forEach(navbarNode => navbarNode.classList.remove('t-red'));
+    e.target.classList.add('t-red');
+    setActiveNavbarItem(e.target.innerText);
+  }
+
+  const getPage = (title: string) =>
+    title === 'Summary' ? <div className="max-w-[32rem]">{anime.synopsis}</div> : title === 'Episodes' ? <Episodes episodes={anime.episodes} /> : title === 'Characters' ? <Characters characters={anime.characters} /> : title === 'Reviews' ? <Reviews reviews={anime.reviews} /> : null;
+  
   useEffect(() => {
     getData(id)
       .then(result => {
@@ -63,9 +74,9 @@ const AnimeLayout = (props) => {
                           src={randomReview.user_avatar}
                           className='h-12 w-12'
                         />
-                      </div>
+                      </div>``
                       <div className="text-white pt-2 pr-14 pl-5 w-[40rem] h-16">
-                        <p class="line-clamp-2">
+                        <p className="line-clamp-2">
                           {Utils.htmlToPlainText(randomReview.content)}
                         </p>
                       </div>
@@ -77,35 +88,34 @@ const AnimeLayout = (props) => {
           </div>
         </div>
         <div className="container mx-auto flex-1">
-          <div className="w-3/4 mx-auto flex">
-            <div className="h-[fit-content] -mt-7 sticky">
-              <Image height="277" width="195" src={anime.posterImage} alt={anime.title} />
+          <div className="w-5/6 mx-auto flex">
+            <div className="h-[fit-content] -mt-14 sticky">
+              <Image height="277" width="195" src={anime.posterImage} alt={anime.title} className='h-[17rem] w-[12rem] max-w-fit' />
             </div>
-            <div className="py-3">
+            <div className="py-3 px-7 min-w-[35rem] flex flex-col items-center mb-12">
               <div className="mx-10">
                 <div className="row-h space-x-2">
                   {animeNavbarItems.map((navbarItem, index) =>
                     <div
-                      className='tracking-tight border border-gray-50 bg-gray-100 text-center px-2'
+                      className={`tracking-tight border border-gray-50 bg-gray-100 text-center px-2 cursor-pointer navbar-item ${navbarItem === 'Summary' ? 't-red' : ''}`}
                       key={index}
+                      onClick={(e) => handleNavbarClick(e)}
                     >
-                      <a href={navbarItem === 'Summary' ? id : `${id}/${navbarItem.toLowerCase()}`}>
-                        {navbarItem}
-                      </a>
+                      {navbarItem}
                     </div>
                   )
                   }
                 </div>
               </div>
-              <div className="row-h pt-4 font-bold whitespace-nowrap">
-                <div className='t-main tracking-wide mb-1 text-xl px-4'>
+              <div className="row-h pt-7 pb-3 font-bold whitespace-nowrap">
+                <div className='t-main tracking-wide mb-1 text-xl px-4 pl-4'>
                   {anime.title}
                 </div>
                 <div className="text-gray-400 pt-0.5 pr-7">
                   {anime.startDate.split('-')[0]}
                 </div>
               </div>
-              <div className="inline-flex justify-center ml-4">
+              <div className="mx-auto row-h pl-4">
                 <div className="my-auto pr-1">
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                     <path
@@ -131,8 +141,11 @@ const AnimeLayout = (props) => {
                   Rank # {anime.ratingRank} (Highest Rating Anime)
                 </div>
               </div>
+              <div className='pt-6 px-4'>
+                {getPage(activeNavbarItem)}
+              </div>
             </div>
-            <div className='bg-white mt-12 pt-3 pb-6 px-7 rounded-xl'>
+            <div className='bg-white mt-12 pt-3 pb-6 px-7 rounded-xl h-[fit-content]'>
               <div className="t-main font-bold tracking-wide mb-1 text-lg">
                 Anime Details
               </div>

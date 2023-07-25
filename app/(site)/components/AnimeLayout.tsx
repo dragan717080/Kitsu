@@ -59,7 +59,7 @@ const AnimeLayout = (props) => {
               <div className="relative h-[20rem] w-full row-h">
                 {Object.keys(randomReview).length > 0 &&
                   (
-                    <div className='absolute bottom-3 mx-auto row w-2/5 ml-12'>
+                    <div className='absolute bottom-3 mx-auto row w-2/5'>
                       <div className="rounded-full overflow-hidden h-12">
                         <Image
                           height="50"
@@ -70,7 +70,7 @@ const AnimeLayout = (props) => {
                         />
                       </div>
                       <div className="text-white pt-2 pr-14 pl-5 w-[40rem] h-16">
-                        <p class="line-clamp-2">
+                        <p className="line-clamp-2">
                           {Utils.htmlToPlainText(randomReview.content)}
                         </p>
                       </div>

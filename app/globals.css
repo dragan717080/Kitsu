@@ -68,13 +68,9 @@ body {
     @apply whitespace-nowrap overflow-hidden text-ellipsis;
 }
 
-.custom-truncate {
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Adjust the number for the maximum number of lines to show */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+.max-w-fit {
+    max-width: fit-content;
+}
 
 .spinner {
     border: 4px solid rgba(255, 255, 255, 0.3);
